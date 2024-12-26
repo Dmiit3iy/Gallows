@@ -12,7 +12,7 @@ public class User {
     private String username;
     private int lives = Constants.LIFE_LEVEL;
 
-    public int minusLive() {
-        return lives -= 1;
+    public void minusLive() {
+        lives -= 1;
     }
 }
