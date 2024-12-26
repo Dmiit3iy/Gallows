@@ -1,9 +1,9 @@
 package repository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 
 public class WorldRepository {
     private Loadable loadable;
@@ -17,7 +17,7 @@ public class WorldRepository {
     /**
      * Метод для инициализации репозитория
      */
-    public void initRepository() {
+    public void initRepository() throws IOException {
         worlds.addAll(loadable.load());
     }
 
@@ -32,6 +32,5 @@ public class WorldRepository {
             return worlds.get(rand.nextInt(worlds.size()));
         } else return "транзакция";
     }
-
 
 }

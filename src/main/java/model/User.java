@@ -13,6 +13,6 @@ public class User {
     private int lives = Constants.LIFE_LEVEL;
 
     public int minusLive() {
-        return --lives;
+        return lives -= 1;
     }
 }
