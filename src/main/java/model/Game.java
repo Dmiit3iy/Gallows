@@ -5,8 +5,9 @@ import repository.WorldRepository;
 import util.Utils;
 
 import java.util.Arrays;
+import java.util.List;
 
-import static util.Utils.findChar;
+import static util.Utils.findChar2;
 import static util.Utils.haveAnyStars;
 
 @AllArgsConstructor
@@ -19,16 +20,16 @@ public class Game {
         User user = new User(name);
         System.out.println(user.getUsername() + " тебе можно будет " + user.getLives() + "раз(раза) ошибиться, чтобы отгадать слово");
         String secretWord = worldRepository.getRandomWorld();
-
-
         String[] wordForGame = Utils.makeSecretArr(secretWord);
         System.out.println(Arrays.toString(wordForGame));
 
         while (user.getLives() > 0 && haveAnyStars(wordForGame)) {
             String letter = Utils.readChar();
-            int charIndex = findChar(secretWord, letter);
-            if (charIndex >= 0) {
-                wordForGame[charIndex] = String.valueOf(secretWord.charAt(charIndex));
+            List<Integer> listOfCharIndex = findChar2(secretWord, letter);
+            if (!listOfCharIndex.isEmpty()) {
+                for (int i : listOfCharIndex) {
+                    wordForGame[i] = String.valueOf(secretWord.charAt(i));
+                }
                 System.out.println(Arrays.toString(wordForGame));
             } else {
                 user.minusLive();
