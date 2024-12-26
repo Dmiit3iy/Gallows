@@ -32,5 +32,4 @@ public class WorldRepository {
             return worlds.get(rand.nextInt(worlds.size()));
         } else return "транзакция";
     }
-
 }

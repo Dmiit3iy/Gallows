@@ -1,5 +1,7 @@
 package util;
 
+import model.User;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +32,7 @@ public class Utils {
 
     /**
      * Метод для проверки, того что в слове остались не отгаданные буквы
+     *
      * @param wordForGame
      * @return
      */
@@ -38,29 +41,40 @@ public class Utils {
     }
 
     /**
-     * Метод для поиска индекса переданной буквы в угадываемом слове. Если нет такой буквы, возвращаем -1
+     * Мощный метод для поиска введенной буквы в загаднном слове. Делает уведомление если букву уже вводили.
+     *
      * @param secretWord
+     * @param wordForGame
      * @param letter
-     * @return
+     * @param user
      */
-    public static int findChar(String secretWord, String letter) {
-        return secretWord.indexOf(letter);
-    }
-
-    public static List<Integer> findChar2(String secretWord, String letter) {
+    public static void findChar2(String secretWord, String[] wordForGame, String letter, User user) {
         List<Integer> list = new ArrayList<>();
         for (int i = 0; i < secretWord.length(); i++) {
             if (secretWord.charAt(i) == letter.charAt(0)) {
-
                 list.add(i);
             }
         }
-        return list;
+        if (list.isEmpty()) {
+            user.minusLive();
+            System.out.println("Вы не угадали!");
+        } else {
+            for (int i : list) {
+                if (wordForGame[i].equals(letter)) {
+                    System.out.println("Вы уже вводили эту букву");
+                    break;
+                } else {
+                    wordForGame[i] = String.valueOf(secretWord.charAt(i));
+                }
+            }
+            System.out.println(Arrays.toString(wordForGame));
+        }
     }
 
 
     /**
      * Метод для создания массива с маскировкой букв
+     *
      * @param secretWord
      * @return
      */

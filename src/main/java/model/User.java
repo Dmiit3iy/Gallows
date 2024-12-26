@@ -1,11 +1,10 @@
 package model;
 
 import constant.Constants;
-import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-@Data
+
 @RequiredArgsConstructor
 public class User {
     @NonNull
