@@ -2,12 +2,16 @@ package util;
 
 import model.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Utils {
+
+    private Utils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static String readChar() {
         Scanner scanner = new Scanner(System.in);
@@ -49,12 +53,9 @@ public class Utils {
      * @param user
      */
     public static void findChar2(String secretWord, String[] wordForGame, String letter, User user) {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < secretWord.length(); i++) {
-            if (secretWord.charAt(i) == letter.charAt(0)) {
-                list.add(i);
-            }
-        }
+
+
+        List<Integer> list = IntStream.range(0, secretWord.length()).filter(i -> secretWord.charAt(i) == letter.charAt(0)).boxed().toList();
         if (list.isEmpty()) {
             user.minusLive();
             System.out.println("Вы не угадали!");

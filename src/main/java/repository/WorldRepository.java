@@ -9,6 +9,7 @@ public class WorldRepository {
     private Loadable loadable;
 
     private List<String> worlds = new ArrayList<>();
+    private Random rand = new Random();
 
     public WorldRepository(Loadable loadable) {
         this.loadable = loadable;
@@ -28,8 +29,9 @@ public class WorldRepository {
      */
     public String getRandomWorld() {
         if (!worlds.isEmpty()) {
-            Random rand = new Random();
-            return worlds.get(rand.nextInt(worlds.size()));
-        } else return "транзакция";
+            return worlds.get(this.rand.nextInt(worlds.size()));
+        } else  {
+            return "транзакция";
+        }
     }
 }
